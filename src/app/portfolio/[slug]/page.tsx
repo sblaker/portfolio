@@ -97,4 +97,13 @@ export default function ProjectDetailsPage({ params }: ProjectPageProps) {
           {project.technologies.map((tech) => (
             <span
               key={tech}
-              className="bg-gray-700 text-gray-300 text-xs rounded-full px
+              className="bg-gray-700 text-gray-300 text-xs rounded-full px-3 py-1 mr-2 mb-2"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
