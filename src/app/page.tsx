@@ -40,7 +40,7 @@ export default function Home() {
                   description="Download my CV"
                   icon={
                     <div className="flex space-x-4">
-                      <a href="/cv-antonino-trifiro.pdf" download>
+                      <a href="/portfolio/cv-antonino-trifiro.pdf" download>
                         <IoDocumentTextOutline
                           size={48}
                           className="text-[#00C2E8]"
