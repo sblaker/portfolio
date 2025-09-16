@@ -4,25 +4,26 @@ import { IoLogoGithub } from "react-icons/io5";
 import { myProjects, Project } from "../../../data/projects";
 import type { Metadata } from "next";
 
-// ✅ Tipi centralizzati
+// ✅ Tipi aggiornati per Next.js 15
 interface ProjectPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // ✅ Generazione delle rotte statiche
-export async function generateStaticParams(): Promise<ProjectPageProps["params"][]> {
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return myProjects.map((project) => ({
     slug: project.slug,
   }));
 }
 
-// ✅ Metadata dinamico
+// ✅ Metadata dinamico con params asincroni
 export async function generateMetadata(
   { params }: ProjectPageProps
 ): Promise<Metadata> {
-  const project = myProjects.find((p) => p.slug === params.slug);
+  const { slug } = await params; // Aggiunto await
+  const project = myProjects.find((p) => p.slug === slug);
 
   if (!project) {
     return { title: "Project Not Found" };
@@ -34,9 +35,9 @@ export async function generateMetadata(
   };
 }
 
-// ✅ Pagina principale
-export default function ProjectDetailsPage({ params }: ProjectPageProps) {
-  const { slug } = params;
+// ✅ Pagina principale con params asincroni
+export default async function ProjectDetailsPage({ params }: ProjectPageProps) {
+  const { slug } = await params; // Aggiunto await
   const project: Project | undefined = myProjects.find((p) => p.slug === slug);
 
   if (!project) {
