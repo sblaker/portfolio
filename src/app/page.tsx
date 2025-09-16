@@ -52,7 +52,7 @@ export default function Home() {
                 <ContentCard
                   id="links"
                   title="Links"
-                  description="Collegati con me"
+                  description="Connect with me"
                   icon={
                     <div className="flex space-x-4">
                       <a
