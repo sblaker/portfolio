@@ -1,12 +1,11 @@
 /** @type {import('next').NextConfig} */
 
-// Define your repository name here
-const repo = "sblaker.github.io";
-
 const nextConfig = {
   output: "export",
-  basePath: `/${repo}`,
-  assetPrefix: `/${repo}`,
+  // basePath e assetPrefix non sono necessari per un repository
+  // del tipo <username>.github.io
+  // basePath: '/sblaker.github.io', // <-- RIMUOVI O COMMENTA QUESTA RIGA
+  // assetPrefix: '/sblaker.github.io', // <-- RIMUOVI O COMMENTA QUESTA RIGA
   images: {
     unoptimized: true,
   },

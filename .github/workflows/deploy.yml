@@ -1,52 +1,57 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# Nome della tua GitHub Action
+name: Deploy Next.js site to Pages
 
+# L'azione si attiva ogni volta che fai un push sul branch "main"
 on:
-  # Runs on pushes targeting the default branch
   push:
-    branches: ['main']
+    branches: ["main"] # Cambia in "master" se il tuo branch principale si chiama così
 
-  # Allows you to run this workflow manually from the Actions tab
+  # Permette di lanciare questa azione manualmente dalla tab "Actions" di GitHub
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# Imposta i permessi necessari per il deploy su GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: 'pages'
-  cancel-in-progress: false
-
+# Definisce le operazioni da eseguire
 jobs:
-  # Single deploy job since we're just deploying
+  # Primo job: costruire il sito
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout # Scarica il codice del tuo repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js # Imposta l'ambiente Node.js per costruire il sito
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20" # Usa una versione recente di Node.js
+          cache: 'npm'
+
+      - name: Setup Pages # Configura GitHub Pages per il deploy
+        uses: actions/configure-pages@v5
+
+      - name: Install dependencies # Installa le dipendenze del progetto
+        run: npm ci
+
+      - name: Build with Next.js # Esegue il build del sito
+        run: npm run build
+
+      - name: Upload artifact # Carica i file del sito costruito per il deploy
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  # Secondo job: fare il deploy del sito
   deploy:
+    needs: build # Questo job parte solo se il "build" è stato completato con successo
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload the "out" directory
-          path: './out'
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages # Esegue il deploy
         id: deployment
         uses: actions/deploy-pages@v4
