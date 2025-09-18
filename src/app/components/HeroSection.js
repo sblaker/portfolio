@@ -6,7 +6,7 @@ export default function HeroSection() {
     <div className="bg-[#1C1C1C] p-6 rounded-3xl shadow-lg relative">
       <div className="relative w-full h-80 rounded-2xl overflow-hidden mb-6">
         <Image
-          src="/portfolio/profile.jpg"
+          src="/profile.jpg"
           alt="Antonino Trifirò"
           fill // Modern Next.js syntax for filling the parent container
           className="object-cover rounded-2xl" // Replaces the old 'objectFit' prop

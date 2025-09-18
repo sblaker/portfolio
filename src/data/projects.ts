@@ -28,7 +28,7 @@ export const myProjects: Project[] = [
       "Big Data",
       "Network Security",
     ],
-    imageUrl: "/portfolio/images/projects/ids.png",
+    imageUrl: "/images/projects/ids.png",
     githubUrl: "#", // ACTION: Replace with your actual repo link
   },
   {
@@ -46,7 +46,7 @@ export const myProjects: Project[] = [
       "OpenWeatherMap",
       "NASA API",
     ],
-    imageUrl: "/portfolio/images/projects/cyd.jpg",
+    imageUrl: "/images/projects/cyd.jpg",
     githubUrl: "https://github.com/sblaker/sblaker.github.io",
     liveDemoUrl: "https://sblaker.github.io",
   },
@@ -64,7 +64,7 @@ export const myProjects: Project[] = [
       "Linux",
       "Teamwork",
     ],
-    imageUrl: "/portfolio/images/projects/cyberchallenge.jpeg",
+    imageUrl: "/images/projects/cyberchallenge.jpeg",
     githubUrl: "#", // Use "#" or undefined if there is no repository
     liveDemoUrl: "https://www.cyberchallenge.it/",
   },
