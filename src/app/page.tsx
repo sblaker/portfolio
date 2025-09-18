@@ -28,7 +28,7 @@ export default function Home() {
                 <Link href="/portfolio" passHref>
                   <ContentCard
                     title="Portfolio"
-                    description="I miei progetti"
+                    description="My projects and works"
                     icon={<IoBriefcaseOutline
                       size={48}
                       className="text-[#00C2E8]" />} id={undefined}                  />
